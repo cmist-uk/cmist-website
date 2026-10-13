@@ -26,7 +26,7 @@ content would need to be moved, but the website itself would carry on working.
 
 ## Editing content
 
-The CMS lets you edit two types of content: **Projects** and **Facilities** currently. New content types can
+The CMS lets you edit three types of content: **Projects**, **Facilities** and **Partners**. New content types can
 easily be added in future.
 
 ### Logging in
@@ -57,10 +57,21 @@ Each facility describes a workshop, machine, or space available to members. It h
 | **Description** | The main text, written in a rich-text editor. |
 | **Photos** | One or more images shown with the facility. The first image is used as the cover on the activities page. |
 
+### Partners
+
+Each partner is an organisation or business that supports the Shed. Partners are shown as a list on
+the partners page — there is no separate page for each one. A partner has three fields:
+
+| Field | What it's for |
+| --- | --- |
+| **Name** | The partner's name. Required. |
+| **Description** | The main text, written in a rich-text editor. |
+| **Photos** | One or more images shown with the partner. All photos are displayed on the partners page. |
+
 ### Steps for a typical edit
 
 1. Log in to the CMS.
-2. Click **Projects** or **Facilities** in the left menu.
+2. Click **Projects**, **Facilities** or **Partners** in the left menu.
 3. Click an existing item to edit it, or click **Create new** to add one.
 4. Make your changes to the text and images.
 5. Click **Publish** to make the change live.
@@ -79,7 +90,6 @@ Some pages are written in code rather than stored as content, so they can't be c
 
 - **Home**
 - **About**
-- **Partners**
 - **Contact**
 
 Changes to those pages, or to the layout, navigation, colours, or styling, need a developer.
@@ -112,7 +122,7 @@ Inside the site:
 
 Inside the CMS:
 
-- `cms/schemaTypes/` — defines the fields for **Project** and **Facility**.
+- `cms/schemaTypes/` — defines the fields for **Project**, **Facility** and **Partner**.
 
 ## Other things to know
 

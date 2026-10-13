@@ -13,9 +13,10 @@ const client = createClient({
 
 const projectsFile = path.join(__dirname, '../src/_data/projects.json')
 const facilitiesFile = path.join(__dirname, '../src/_data/facilities.json')
+const partnersFile = path.join(__dirname, '../src/_data/partners.json')
 
 async function fetchAndWrite() {
-  const [projects, facilities] = await Promise.all([
+  const [projects, facilities, partners] = await Promise.all([
     client.fetch(`
       *[_type == "project"] | order(_createdAt desc) {
         title,
@@ -28,6 +29,13 @@ async function fetchAndWrite() {
       *[_type == "facility"] | order(_createdAt asc) {
         title,
         "slug": slug.current,
+        content,
+        "images": images[]{ "_key": _key, "url": asset->url }
+      }
+    `),
+    client.fetch(`
+      *[_type == "partner"] | order(_createdAt asc) {
+        title,
         content,
         "images": images[]{ "_key": _key, "url": asset->url }
       }
@@ -48,6 +56,10 @@ async function fetchAndWrite() {
   const facilityData = facilities.map(normalise)
   fs.writeFileSync(facilitiesFile, JSON.stringify(facilityData, null, 2))
   console.log(`[sanity] fetched ${facilityData.length} facilit(ies)`)
+
+  const partnerData = partners.map(normalise)
+  fs.writeFileSync(partnersFile, JSON.stringify(partnerData, null, 2))
+  console.log(`[sanity] fetched ${partnerData.length} partner(s)`)
 }
 
 module.exports = { fetchAndWrite }

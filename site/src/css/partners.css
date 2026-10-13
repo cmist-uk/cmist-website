@@ -1,0 +1,17 @@
+/* Partners page */
+
+.partners-intro {
+  max-width: 680px;
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+}
+
+/* Separate consecutive partner entries (list page has no per-item pages) */
+.partner + .partner {
+  border-top: 1px solid var(--outline-variant);
+  padding-top: 2rem;
+}
+
+.partner-content p:last-child {
+  margin-bottom: 0;
+}

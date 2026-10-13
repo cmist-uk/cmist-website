@@ -2,22 +2,41 @@
 title: Partners
 layout: "base.njk"
 navActive: partners
+lightbox: true
 ---
 
-<div class="container">
+<section class="container mt-1">
+  <h1>Partners</h1>
 
-<article class="flex gap-30 mt_30 mb_30">
-  <div class="flex-grow">
-    <h1>Partners</h1>
+  <div class="partners-intro">
     <p>CMIST is a CIO registered charity No.1198052 governed by the Charity Commission.  Funds are raised through membership, attendance fees, fundraising, project grants, donation and the occasional sale of items members may create (bird-boxes, hedgehog houses etc).</p>
     <p>Based on the current delivery model CMIST core costs require circa £6,500 per annum to operate and we are always looking to raise additional funding to help pay towards running costs, tools , resources and equipment (for use or resale). </p>
     <p>If you think that you are able to help us with these needs in any way, please don’t hesitate to get in touch to discuss.</p>
   </div>
 
-  <div class="photo-sidebar">
-    <img class="with-border rotate-2" src="/media/images/photos/3A1A250C-0F66-483B-A5C7-BAC27D0E53F4.avif" />
-  </div>
+  {% if partners.length %}
+    {% for partner in partners %}
+      <article class="partner with-photo-sidebar gap-30 mt_30 mb_30">
+        <div class="flex-grow">
+          <h2>{{ partner.title }}</h2>
 
-</article>
+          <div class="partner-content">
+            {{ partner.contentHtml | safe }}
+          </div>
+        </div>
 
-</div>
+        {% if partner.images.length %}
+          <div class="photo-sidebar detail-photos">
+            {% for image in partner.images %}
+              <a class="detail-photo" href="{{ image.url }}?w=1600&auto=format&fit=max">
+                <img src="{{ image.url }}?w=800&auto=format&fit=max" alt="{{ partner.title }}" />
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </article>
+    {% endfor %}
+  {% else %}
+    <p>No partners listed yet — check back soon.</p>
+  {% endif %}
+</section>
