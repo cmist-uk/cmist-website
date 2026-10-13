@@ -1,0 +1,19 @@
+# Netlify configuration for the Sanity Studio (the CMS site).
+#
+# IMPORTANT: the Base directory for this site must be set to `cms` in the
+# Netlify UI (Project configuration > Build settings). Netlify searches for
+# netlify.toml in the package directory, then the base directory, then the
+# repo root — and the root netlify.toml (which sets base = "site") would
+# otherwise override the UI and build the public website instead of the CMS.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Sanity Studio is a single-page app: serve index.html for any route that
+# doesn't match a real file (e.g. /structure/project;abc123) so that
+# refreshing or deep-linking into the Studio works.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
