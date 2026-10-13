@@ -2,3 +2,9 @@
   base    = "site"
   command = "npm run build"
   publish = "_site"
+
+[[redirects]]
+  from = "/funding"
+  to = "/partners"
+  status = 301
+  force = false

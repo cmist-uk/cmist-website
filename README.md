@@ -79,7 +79,7 @@ Some pages are written in code rather than stored as content, so they can't be c
 
 - **Home**
 - **About**
-- **Funding**
+- **Partners**
 - **Contact**
 
 Changes to those pages, or to the layout, navigation, colours, or styling, need a developer.
