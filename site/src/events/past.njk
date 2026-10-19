@@ -1,0 +1,46 @@
+---
+title: Past Events
+layout: "base.njk"
+navActive: events
+eventSection: past
+pagination:
+  data: pastEvents
+  size: 9
+  alias: event
+  generatePageOnEmptyData: true
+permalink: "events/past/{% if pagination.pageNumber > 0 %}{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
+---
+
+<section class="container mt-1">
+  <h1>Events</h1>
+
+  {% include "../partials/event-tabs.njk" %}
+
+  <h2>Past Events</h2>
+
+  {% if pagination.items.length %}
+    <div class="md:grid-cols-3 mb-1">
+      {% for event in pagination.items %}
+        {% include "../partials/event-card.njk" %}
+      {% endfor %}
+    </div>
+
+    {% if pagination.hrefs.length > 1 %}
+      <nav class="pagination" aria-label="Past events pages">
+        {% if pagination.href.previous %}
+          <a href="{{ pagination.href.previous }}">← Newer events</a>
+        {% else %}
+          <span></span>
+        {% endif %}
+        <span>Page {{ pagination.pageNumber + 1 }} of {{ pagination.hrefs.length }}</span>
+        {% if pagination.href.next %}
+          <a href="{{ pagination.href.next }}">Older events →</a>
+        {% else %}
+          <span></span>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% else %}
+    <p>No past events yet.</p>
+  {% endif %}
+</section>

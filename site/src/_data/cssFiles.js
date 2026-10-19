@@ -6,6 +6,7 @@ module.exports = [
   "utility",
   "hero",
   "cards",
+  "events",
   "gallery",
   "forms",
   "contact",

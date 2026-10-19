@@ -1,0 +1,41 @@
+---
+pagination:
+  data: events
+  size: 1
+  alias: event
+permalink: "events/{{ event.slug }}/"
+layout: "base.njk"
+lightbox: true
+eleventyComputed:
+  title: "{{ event.title }}"
+---
+
+<section class="container mt-1">
+
+  <article class="with-photo-sidebar gap-30 mt_30 mb_30">
+    <div class="flex-grow">
+      <h1>{{ event.title }}</h1>
+
+      <p class="event-detail-date">
+        <time datetime="{{ event.startsAt }}">{{ event.dateLabel }} at {{ event.timeLabel }}</time>
+      </p>
+
+      <div class="event-content">
+        {{ event.contentHtml | safe }}
+      </div>
+
+      <p class="back-link"><a href="/events/">← Back to events</a></p>
+    </div>
+
+    {% if event.images.length %}
+      <div class="photo-sidebar detail-photos">
+        {% for image in event.images %}
+          <a class="detail-photo" href="{{ image.url }}?w=1600&auto=format&fit=max">
+            <img src="{{ image.url }}?w=800&auto=format&fit=max" alt="{{ event.title }}" />
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </article>
+
+</section>

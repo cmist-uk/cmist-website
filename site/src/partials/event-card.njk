@@ -1,0 +1,14 @@
+<article class="card event-card">
+  {% if event.images[0].url %}
+    <img src="{{ event.images[0].url }}?w=600&auto=format" alt="{{ event.title }}" />
+  {% endif %}
+  <div class="content">
+    <p class="event-date">
+      <span class="event-date-day">{{ event.dayLabel }}</span>
+      <span class="event-date-month">{{ event.monthLabel }}</span>
+      <span class="event-date-time">{{ event.timeLabel }}</span>
+    </p>
+    <h3>{{ event.title }}</h3>
+    <a href="/events/{{ event.slug }}/">Read more</a>
+  </div>
+</article>

@@ -173,3 +173,13 @@ header .phone-number a {
 
 }
 
+/* Seven nav items: tighten spacing on medium screens so the row fits. */
+@media screen and (width >= 760px) and (width < 1024px) {
+  header nav ul li {
+    padding: 16px 4px;
+  }
+  header nav a {
+    font-size: 1em;
+  }
+}
+

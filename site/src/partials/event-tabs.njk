@@ -1,0 +1,4 @@
+<nav class="event-tabs" aria-label="Event listings">
+  <a href="/events/"{% if eventSection == "upcoming" %} class="active" aria-current="page"{% endif %}>Upcoming Events</a>
+  <a href="/events/past/"{% if eventSection == "past" %} class="active" aria-current="page"{% endif %}>Past Events</a>
+</nav>

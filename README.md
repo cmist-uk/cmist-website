@@ -26,7 +26,7 @@ content would need to be moved, but the website itself would carry on working.
 
 ## Editing content
 
-The CMS lets you edit three types of content: **Projects**, **Facilities** and **Partners**. New content types can
+The CMS lets you edit four types of content: **Projects**, **Facilities**, **Partners** and **Events**. New content types can
 easily be added in future.
 
 ### Logging in
@@ -68,10 +68,31 @@ the partners page — there is no separate page for each one. A partner has thre
 | **Description** | The main text, written in a rich-text editor. |
 | **Photos** | One or more images shown with the partner. All photos are displayed on the partners page. |
 
+### Events
+
+Each event is a date-based item in the **Events** section of the website. It has five fields:
+
+| Field | What it's for |
+| --- | --- |
+| **Headline** | The event's title. Required. |
+| **URL Slug** | Filled in automatically from the headline. |
+| **Date and time** | When the event starts. Required. |
+| **Body Content** | The main text, written in a rich-text editor. |
+| **Photos** | One or more images shown with the event. The first image is used as the cover on the events list. |
+
+Events are divided automatically:
+
+- **Upcoming Events** (`/events/`) lists events from today onwards, soonest first.
+- **Past Events** (`/events/past/`) lists earlier events, most recent first, nine per page.
+
+The division is worked out when the site is built. After an event has taken place, it moves to Past
+the next time the site rebuilds — normally when content is published, or when a build is triggered
+manually in Netlify.
+
 ### Steps for a typical edit
 
 1. Log in to the CMS.
-2. Click **Projects**, **Facilities** or **Partners** in the left menu.
+2. Click **Projects**, **Facilities**, **Partners** or **Events** in the left menu.
 3. Click an existing item to edit it, or click **Create new** to add one.
 4. Make your changes to the text and images.
 5. Click **Publish** to make the change live.
@@ -122,7 +143,7 @@ Inside the site:
 
 Inside the CMS:
 
-- `cms/schemaTypes/` — defines the fields for **Project**, **Facility** and **Partner**.
+- `cms/schemaTypes/` — defines the fields for **Project**, **Facility**, **Partner** and **Event**.
 
 ## Other things to know
 

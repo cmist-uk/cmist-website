@@ -1,0 +1,25 @@
+---
+title: Events
+layout: "base.njk"
+navActive: events
+eventSection: upcoming
+---
+
+<section class="container mt-1">
+  <h1>Events</h1>
+  <p class="events-intro">Things happening at the Shed — everyone is welcome. Come along, meet other members, and see what we're up to.</p>
+
+  {% include "./partials/event-tabs.njk" %}
+
+  <h2>Upcoming Events</h2>
+
+  {% if upcomingEvents.length %}
+    <div class="md:grid-cols-3 mb-1">
+      {% for event in upcomingEvents %}
+        {% include "./partials/event-card.njk" %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No upcoming events at the moment — check back soon.</p>
+  {% endif %}
+</section>

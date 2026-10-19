@@ -14,9 +14,42 @@ const client = createClient({
 const projectsFile = path.join(__dirname, '../src/_data/projects.json')
 const facilitiesFile = path.join(__dirname, '../src/_data/facilities.json')
 const partnersFile = path.join(__dirname, '../src/_data/partners.json')
+const eventsFile = path.join(__dirname, '../src/_data/events.json')
+const upcomingEventsFile = path.join(__dirname, '../src/_data/upcomingEvents.json')
+const pastEventsFile = path.join(__dirname, '../src/_data/pastEvents.json')
+
+const timeZone = 'Europe/London'
+
+const longDateFormatter = new Intl.DateTimeFormat('en-GB', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone,
+})
+const dayFormatter = new Intl.DateTimeFormat('en-GB', { day: 'numeric', timeZone })
+const monthFormatter = new Intl.DateTimeFormat('en-GB', { month: 'short', timeZone })
+const timeFormatter = new Intl.DateTimeFormat('en-GB', {
+  hour: 'numeric',
+  minute: '2-digit',
+  hour12: true,
+  timeZone,
+})
+
+// ISO date key (YYYY-MM-DD) for a given instant, in the site's timezone.
+function dateKey(date) {
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    timeZone,
+  }).formatToParts(date)
+  const part = type => parts.find(item => item.type === type).value
+  return `${part('year')}-${part('month')}-${part('day')}`
+}
 
 async function fetchAndWrite() {
-  const [projects, facilities, partners] = await Promise.all([
+  const [projects, facilities, partners, events] = await Promise.all([
     client.fetch(`
       *[_type == "project"] | order(_createdAt desc) {
         title,
@@ -36,6 +69,15 @@ async function fetchAndWrite() {
     client.fetch(`
       *[_type == "partner"] | order(_createdAt asc) {
         title,
+        content,
+        "images": images[]{ "_key": _key, "url": asset->url }
+      }
+    `),
+    client.fetch(`
+      *[_type == "event" && defined(startsAt) && defined(slug.current)] | order(startsAt asc) {
+        title,
+        "slug": slug.current,
+        startsAt,
         content,
         "images": images[]{ "_key": _key, "url": asset->url }
       }
@@ -60,6 +102,38 @@ async function fetchAndWrite() {
   const partnerData = partners.map(normalise)
   fs.writeFileSync(partnersFile, JSON.stringify(partnerData, null, 2))
   console.log(`[sanity] fetched ${partnerData.length} partner(s)`)
+
+  const today = dateKey(new Date())
+  const eventData = events
+    .filter(event => !Number.isNaN(Date.parse(event.startsAt)))
+    .map(event => {
+      const start = new Date(event.startsAt)
+      return {
+        ...normalise(event),
+        startsAt: start.toISOString(),
+        dateLabel: longDateFormatter.format(start),
+        dayLabel: dayFormatter.format(start),
+        monthLabel: monthFormatter.format(start),
+        timeLabel: timeFormatter.format(start),
+        // An event stays "upcoming" for the whole of its calendar day.
+        isUpcoming: dateKey(start) >= today,
+      }
+    })
+
+  const upcomingEvents = eventData
+    .filter(event => event.isUpcoming)
+    .sort((a, b) => Date.parse(a.startsAt) - Date.parse(b.startsAt))
+  const pastEvents = eventData
+    .filter(event => !event.isUpcoming)
+    .sort((a, b) => Date.parse(b.startsAt) - Date.parse(a.startsAt))
+
+  // All events, for the individual detail pages.
+  fs.writeFileSync(eventsFile, JSON.stringify(eventData, null, 2))
+  fs.writeFileSync(upcomingEventsFile, JSON.stringify(upcomingEvents, null, 2))
+  fs.writeFileSync(pastEventsFile, JSON.stringify(pastEvents, null, 2))
+  console.log(
+    `[sanity] fetched ${eventData.length} event(s) — ${upcomingEvents.length} upcoming, ${pastEvents.length} past`
+  )
 }
 
 module.exports = { fetchAndWrite }

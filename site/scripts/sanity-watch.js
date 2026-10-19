@@ -13,7 +13,7 @@ fetchAndWrite()
 
 console.log('[sanity] Listening for changes...')
 
-const subscription = client.listen('*[_type in ["project", "facility", "partner"]]').subscribe(event => {
+const subscription = client.listen('*[_type in ["project", "facility", "partner", "event"]]').subscribe(event => {
   console.log(`[sanity] ${event.type} — "${event.result?.title ?? event.documentId}"`)
   fetchAndWrite().catch(console.error)
 })

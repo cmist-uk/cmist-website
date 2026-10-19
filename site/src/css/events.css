@@ -1,0 +1,92 @@
+.events-intro {
+  max-width: 680px;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Upcoming / Past switcher */
+.event-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.event-tabs a {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  margin-bottom: -1px;
+  border-bottom: 3px solid transparent;
+  color: var(--primary);
+  font-weight: var(--weight-bold);
+  text-decoration: none;
+}
+
+.event-tabs a:hover {
+  color: var(--secondary);
+}
+
+.event-tabs a.active {
+  color: var(--secondary);
+  border-bottom-color: var(--secondary);
+}
+
+/* Date shown on event cards */
+.event-date {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 0.35rem;
+  color: var(--secondary);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.event-date-day {
+  font-size: var(--text-xl);
+  line-height: 1;
+}
+
+.event-date-time {
+  margin-left: auto;
+}
+
+/* Date shown on the detail page */
+.event-detail-date {
+  margin-bottom: 1.5rem;
+  color: var(--secondary);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+}
+
+.event-content h2 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+/* Past events pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1rem 0 3rem;
+  font-weight: var(--weight-bold);
+}
+
+.pagination a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.pagination a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pagination > span {
+  color: var(--on-surface-variant);
+  font-weight: var(--weight-regular);
+}
