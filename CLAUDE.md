@@ -60,7 +60,7 @@ Current schema types (in `cms/schemaTypes/`):
 - `project` — title, slug (from title), content (portable text / rich text), images (sortable image gallery, with hotspot)
 - `facility` — title, slug (from title), content (portable text / rich text), images (sortable image gallery, with hotspot)
 - `partner` — title, content (portable text / rich text), images (sortable image gallery, with hotspot)
-- `event` — title, slug (from title), startsAt (required datetime), content (portable text / rich text), images (sortable image gallery, with hotspot)
+- `event` — title, slug (from title), startsAt (required datetime), content (portable text / rich text), file (optional downloadable file), images (sortable image gallery, with hotspot)
 
 Rich text (`content` field) is converted to HTML in `scripts/sanity-fetch.js` using `@portabletext/to-html` and stored as `contentHtml` alongside the raw blocks.
 

@@ -66,6 +66,22 @@
   margin-bottom: 0.75rem;
 }
 
+/* File download link on the detail page */
+.event-file {
+  margin-top: 1.5rem;
+}
+
+.event-file a {
+  color: var(--primary);
+  font-weight: var(--weight-bold);
+  text-decoration: none;
+}
+
+.event-file a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* Past events pagination */
 .pagination {
   display: flex;

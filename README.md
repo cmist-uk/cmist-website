@@ -70,7 +70,7 @@ the partners page — there is no separate page for each one. A partner has thre
 
 ### Events
 
-Each event is a date-based item in the **Events** section of the website. It has five fields:
+Each event is a date-based item in the **Events** section of the website. It has six fields:
 
 | Field | What it's for |
 | --- | --- |
@@ -78,6 +78,7 @@ Each event is a date-based item in the **Events** section of the website. It has
 | **URL Slug** | Filled in automatically from the headline. |
 | **Date and time** | When the event starts. Required. |
 | **Body Content** | The main text, written in a rich-text editor. |
+| **File** | An optional file (for example a poster or leaflet) that visitors can download from the event page. |
 | **Photos** | One or more images shown with the event. The first image is used as the cover on the events list. |
 
 Events are divided automatically:

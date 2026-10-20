@@ -35,6 +35,13 @@ export const eventType = defineType({
       of: [{ type: 'block' }],
     }),
     defineField({
+      name: 'file',
+      type: 'file',
+      title: 'File',
+      description: 'An optional file visitors can download from the event page.',
+      options: { storeOriginalFilename: true },
+    }),
+    defineField({
       name: 'images',
       type: 'array',
       title: 'Photos',

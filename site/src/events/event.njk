@@ -24,6 +24,12 @@ eleventyComputed:
         {{ event.contentHtml | safe }}
       </div>
 
+      {% if event.file %}
+        <p class="event-file">
+          <a href="{{ event.file.url }}?dl={{ event.file.filename | urlencode }}">Download {{ event.file.filename }}</a>
+        </p>
+      {% endif %}
+
       <p class="back-link"><a href="/events/">← Back to events</a></p>
     </div>
 

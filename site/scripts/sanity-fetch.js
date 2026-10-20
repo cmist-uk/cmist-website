@@ -79,17 +79,34 @@ async function fetchAndWrite() {
         "slug": slug.current,
         startsAt,
         content,
+        "file": file {
+          "url": asset->url,
+          "originalFilename": asset->originalFilename
+        },
         "images": images[]{ "_key": _key, "url": asset->url }
       }
     `),
   ])
 
-  const normalise = doc => ({
-    ...doc,
-    // Images are stored in editor-defined order; the first is the cover image.
-    images: (doc.images ?? []).filter(image => image.url),
-    contentHtml: doc.content ? toHTML(doc.content) : '',
-  })
+  const normalise = doc => {
+    const normalised = {
+      ...doc,
+      // Images are stored in editor-defined order; the first is the cover image.
+      images: (doc.images ?? []).filter(image => image.url),
+      contentHtml: doc.content ? toHTML(doc.content) : '',
+    }
+
+    if (doc.file) {
+      normalised.file = doc.file.url
+        ? {
+            url: doc.file.url,
+            filename: doc.file.originalFilename || decodeURIComponent(doc.file.url.split('/').pop()),
+          }
+        : null
+    }
+
+    return normalised
+  }
 
   const projectData = projects.map(normalise)
   fs.writeFileSync(projectsFile, JSON.stringify(projectData, null, 2))
